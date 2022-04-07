@@ -7,19 +7,47 @@
     <title>Document</title>
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div>
+            // Vue인스턴스안에 등록한 router정보를 router-link태그를 이용해서 화면에서 보여줘야 하는 컴포넌트 조작
+            <router-link to='/login'>Login</router-link> 
+            <router-link to='/main'>Main</router-link>
+        </div>
+        <router-view></router-view>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> <!-- Vue 라이브러리 -->
-    <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script> <!-- Vue router 라이브러리 -->
+    <script src="https://unpkg.com/vue-router@3.5.3/dist/vue-router.js"></script>
 
     <script>
-        new VueRouter({
 
+        var LoginComponent = {
+            templete: '<div>Login</div>',
+        }
+
+        var MainComponent = {
+            templete: '<div>Main</div>',
+        }
+
+        // 생성자 패턴
+        var router = new VueRouter({
+            // 페이지의 라우팅 정보 : 페이지에 대한 정보가 객체로 되어 배열로 담김
+            routes: [
+                // 각 페이지에 대한 정보는 하나의 객체
+                {
+                    path: '/login',     // 페이지의 URL
+                    components: LoginComponent   // 해당 URL에 표시될 컴포넌트
+                },
+                {
+                    path: '/main',
+                    components: MainComponent
+                },
+            ],
         });
 
         new Vue({
-            el: '#app',
-
+            el: '#app',     // id가 app인 엘리먼트에 Vue 인스턴스 정의
+            router: router, // 생성한 Router를 router-view와 연결하기
         })
     </script>
 </body>
