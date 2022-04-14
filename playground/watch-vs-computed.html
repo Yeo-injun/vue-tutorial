@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div>
+        <h1>Watch속성과 Computed속성의 차이</h1>
+        <p>
+            Watch속성과 computed속성 모두 data속성에 정의되어 있는 값에 의존함. <br>
+            computed속성은 data의 validation 혹은 간단한 연산작업 처리에 적합하고 <br>
+            Watch속성은 http통신과 같은 로직 수행에 적합함.
+        </p>   
+    </div>
+    <div id="app">
+        {{ num }}
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+            },
+            computed: {
+                doubleNum: function() {
+                    return this.num * 2;
+                },
+                testNum: function() {
+                    return this.doubleNum + 1;
+                }
+            },
+            watch: {
+                num: function(newValue, oldValue) {
+                    this.fetchUserByNumber(`num property - newValue : ${newValue}, oldValue: ${oldValue}`);
+                },
+                doubleNum: function(newValue, oldValue) {
+                    console.log(`doubleNum property - newValue : ${newValue}, oldValue: ${oldValue}`);
+                },
+                testNum: function(newValue, oldValue) {
+                    console.log(`testNum property - newValue : ${newValue}, oldValue: ${oldValue}`);
+                },
+            },
+            methods: {
+                fetchUserByNumber: function(num) {
+                    console.log(num);
+                }
+            }
+        })
+    </script>
+
+</body>
+</html>

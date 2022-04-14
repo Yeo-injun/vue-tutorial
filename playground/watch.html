@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Vue 인스턴스의 Watch 속성</h1>
+        <p>
+            Watch속성은 data속성의 특정 변수의 변화를 감지한다.
+            특정 변수의 변화가 감지되면 매핑되어 있는 함수를 실행시킨다.
+        </p>
+    </div>
+    <div id="app">
+        {{ num }}
+        <button v-on:click="addNum">Increase</button>    
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+            },
+            watch: {
+                num: function() {
+                    this.logText();
+                },
+            },
+            methods: {
+                addNum: function() {
+                    this.num = ++this.num;
+                },
+                logText: function() {
+                    console.log("changed!!");
+                },
+            }
+        })
+    </script>
+
+</body>
+</html>   
