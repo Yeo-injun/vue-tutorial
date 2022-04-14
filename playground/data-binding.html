@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- v-bind 속성은 기본 HTML속성을 Vue 인스턴스안의 data 속성의 값들과 binding 시켜주는 역할을 담당. -->
+        <!-- <p id="uuid-test" class="text-blue"></p> 와 같이 HTML elemnet를 만들기 위해서는 아래와 같이 v-bind속성을 이용해서 Vue 인스턴스의 data속성과 바인딩시켜주면 됨 -->
+        <p v-bind:id="uuid" v-bind:class="cssClass">{{ num }}</p>
+        <p>{{ doubleNum }}</p>
+        <!-- v-... 와 같은 속성이 있으면 Vue인스턴스의 data속성을 뒤짐. 이를 통해서 Vue인스턴스의 data값에 따라 HTML elemnet를 조작함 -->
+
+        <div v-if="loading">
+            Loading...
+        </div>
+        <div v-else="loading">
+            Log In Complete!!
+        </div>
+
+        <!-- v-if와 v-show의 차이 : v-if의 경우 조건에 맞는 elemnet만 생성해서 DOM에다가 할당. 즉 조건에 맞지 않으면 DOM생성이 안됨. 이에 반해 v-show는 DOM을 생성하고 display속성으로 제어 -->
+        <div v-show="loading">
+            V-Show Loading...
+        </div>
+    </div>
+
+    <div id="app-form">
+        <input type="text" v-model="num">
+        <p>{{ num }}</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                num: 10,
+                uuid: "uuid0-test",
+                cssClass: "text-blue",
+                loading: true,
+            },
+            computed: { // 계산된 속성 - data속성에 있는 값들을 연산해주는 역할 담당
+                doubleNum: function() {
+                    return this.num * 2;
+                }
+            },
+        })
+
+        new Vue({
+            el: '#app-form',
+            data: {
+                num: 20,
+            },
+        })
+    </script>
+</body>
+</html>
