@@ -8,6 +8,10 @@ import VueRouter from 'vue-router';
 // import SignupPage from '@/views/SignupPage.vue';
 
 Vue.use(VueRouter);
+var myTeamPageChildren = [
+    createRoute('MyTeamMember', 'members'),
+    createRoute('LoginPage', 'test'),
+];
 
 export default new VueRouter({
     // 기본은 Hash모드지만 이경우 웹브라우저 url입력창에 #이 계속 붙음.
@@ -18,15 +22,41 @@ export default new VueRouter({
     routes: [
         createRoute('AppMain', '/'),
         createRoute('LoginPage', '/login'),
-        createRoute('SignupPage', '/signup')
+        createRoute('SignupPage', '/signup'),
+        /**
+         * 중첩된 라우트 : https://v3.router.vuejs.org/kr/guide/essentials/nested-routes.html
+         */
+        createRoute('MyTeamPage', '/myTeams', myTeamPageChildren),
+        // {
+        //     path: '',
+        //     component: () => import('@/views/MyTeamPage.vue'),
+        //     children: [
+        //         {
+        //             path: 'members',
+        //             component: () => import('@/views/MyTeamMember.vue')
+        //         },
+        //         {
+        //             path: 'test',
+        //             component: () => import('@/views/LoginPage.vue')
+        //         }
+        //     ]
+        // }
+        // createRoute('MyTeamPage', '/myTeams'),
+        // createRoute('MyTeamMember', '/myTeams/members'),
     ]
 })
 
-function createRoute(component, url) {
+function createRoute(component, url, childernList) {
     var route = 
     {
         path: url,
-        component: () => import(`@/views/${component}.vue`)
+        /**
+         * https://jess2.xyz/vue/vue-tip/ 의 2. Router&컴포넌트 설계 참고
+         * 코드스플리팅 적용요령 설명(추가 학습 필요)
+         */
+        // TODO 컴포넌트 경로 유연하게 설정할 수 있도록 변경 필요
+        component: () => import(`@/views/${component}.vue`),
+        children: childernList,
     }
     
     return route;
