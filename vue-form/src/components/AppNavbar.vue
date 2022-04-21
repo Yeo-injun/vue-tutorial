@@ -6,25 +6,11 @@
 
       <v-spacer></v-spacer>
 
-      <router-link to="/myTeams">
-        <v-btn class="ma-1">소속팀</v-btn>
-      </router-link>
-      
-      <router-link to="/team">
-        <v-btn class="ma-1">농구팀</v-btn>
-      </router-link>
-
-      <router-link to="/myProfile">
-        <v-btn class="ma-1">내정보</v-btn>
-      </router-link>
-
-      <router-link to="/login">
-        <v-btn class="ma-1">로그인</v-btn>
-      </router-link>
-      
-      <router-link to="/signup">
-        <v-btn class="ma-1">회원가입</v-btn>
-      </router-link>
+      <v-btn class="ma-1" to="/myTeams/members">소속팀</v-btn>
+      <v-btn class="ma-1" to="/team">농구팀</v-btn>
+      <v-btn class="ma-1" to="/myProfile">내정보</v-btn>
+      <v-btn class="ma-1" to="/login">로그인</v-btn>
+      <v-btn class="ma-1" to="/signup">회원가입</v-btn>
     </v-app-bar>
 </template>
 
