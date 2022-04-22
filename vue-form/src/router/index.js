@@ -9,8 +9,8 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 var myTeamPageChildren = [
-    createRoute('MyTeamMember', 'members'),
-    createRoute('LoginPage', 'test'),
+    createRoute('views/myTeam/MyTeamMember', 'members'),
+    createRoute('views/LoginPage', 'test'),
 ];
 
 export default new VueRouter({
@@ -20,13 +20,13 @@ export default new VueRouter({
     mode: "history",
     // routes: Vue router에 의해서 컨트롤되는 페이지 정보를 담는 array객체
     routes: [
-        createRoute('AppMain', '/'),
-        createRoute('LoginPage', '/login'),
-        createRoute('SignupPage', '/signup'),
+        createRoute('views/AppMain', '/'),
+        createRoute('views/LoginPage', '/login'),
+        createRoute('views/SignupPage', '/signup'),
         /**
          * 중첩된 라우트 : https://v3.router.vuejs.org/kr/guide/essentials/nested-routes.html
          */
-        createRoute('MyTeamPage', '/myTeams', myTeamPageChildren),
+        createRoute('views/myTeam/MyTeamPage', '/myTeams', myTeamPageChildren),
         // {
         //     path: '',
         //     component: () => import('@/views/MyTeamPage.vue'),
@@ -48,18 +48,17 @@ export default new VueRouter({
 
 
 // TODO  클래스로 만들어서 생성자로 객체 만들기
-function createRoute(component, url, childernList) {
+function createRoute(componentPath, urlPath, childernList) {
     var route = 
     {
-        path: url,
+        path: urlPath,
         /**
          * https://jess2.xyz/vue/vue-tip/ 의 2. Router&컴포넌트 설계 참고
          * 코드스플리팅 적용요령 설명(추가 학습 필요)
          */
         // TODO 컴포넌트 경로 유연하게 설정할 수 있도록 변경 필요
-        component: () => import(`@/views/${component}.vue`),
+        component: () => import(`@/${componentPath}.vue`),
         children: childernList,
     }
-    
     return route;
 } 

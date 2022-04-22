@@ -27,7 +27,7 @@
                 }
                 console.log(data);
                 try {
-                    const result= await login(data);
+                    const result = await login(data);
                     console.log(result);
                     if (result.status == 200) {
                         // 참고자료 : https://v3.router.vuejs.org/guide/essentials/navigation.html#router-push-location-oncomplete-onabort
