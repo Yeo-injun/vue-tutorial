@@ -6,6 +6,7 @@ const axoisService = axois.create({
     baseURL: 'http://54.180.147.129/api/user'
 })
 
+// Controller의 function이름과 동일하게 작성하기
 function login(data) {
     return axoisService.post('/login', data);
 }

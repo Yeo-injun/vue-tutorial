@@ -5,7 +5,6 @@
             <v-tab to="/myTeams/members">팀원 조회</v-tab>
             <v-tab to="/myTeams/test">팀기록 조회</v-tab>
         </v-tabs>
-
         <router-view></router-view>
     </div>
 </template>
